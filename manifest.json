@@ -1,0 +1,19 @@
+{
+  "name": "{{PERSON_FULL_NAME}} | Sharkitect Digital",
+  "short_name": "Sharkitect",
+  "description": "Digital business card for {{PERSON_FULL_NAME}} — Sharkitect Digital",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1A1A1A",
+  "theme_color": "#1A1A1A",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
