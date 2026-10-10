@@ -55,11 +55,3 @@ If any baked field changes after Phase 3B, the propagation tool (`tools/propagat
 ## Do not serve this repo directly
 
 This repo is the template. GitHub Pages is NOT enabled on it — it would render with literal `{{TOKENS}}` visible to users. Always spawn via `--template`, fill the tokens, enable Pages on the spawned repo.
-
-## Share icon + link preview (added 2026-10-10)
-
-The round icon in the card's top-right corner opens the phone's share sheet with the card link. On desktop it copies the link and shows "Link copied". It is a header control, not a second button: the card still has exactly one button (Save My Contact, opens the QR). Do not turn it into a full-width button.
-
-Link-preview (Open Graph) tags in `<head>` make a texted link show the person's name, title and an image. They use `{{PERSON_CARD_URL}}`, which `tools/card-spawn.py` fills with the card's URL (ending in `/`). Hand-built cards must replace it by hand.
-
-Regenerate or retrofit any card with HQ `tools/card-builds/add_share_button.py` (idempotent).

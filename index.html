@@ -5,19 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{{PERSON_FULL_NAME}} | Sharkitect Digital</title>
     <meta name="description" content="{{PERSON_FULL_NAME}} - {{PERSON_TITLE}}, Sharkitect Digital. ">
-<!-- card-share:meta:start -->
-<link rel="canonical" href="{{PERSON_CARD_URL}}">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Sharkitect Digital">
-<meta property="og:title" content="{{PERSON_FULL_NAME}}">
-<meta property="og:description" content="{{PERSON_TITLE}} · Sharkitect Digital">
-<meta property="og:url" content="{{PERSON_CARD_URL}}">
-<meta property="og:image" content="{{PERSON_CARD_URL}}og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Sharkitect Digital">
-<meta name="twitter:card" content="summary_large_image">
-<!-- card-share:meta:end -->
 
     <!-- PWA / Home Screen support -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -295,39 +282,10 @@
             .tagline { font-size: 10px; }
             .btn-row { flex-direction: column; }
         }
-/* card-share:css:start */
-.share-btn{
-  position:absolute; top:14px; right:14px; z-index:5;
-  width:40px; height:40px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.14);
-  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
-  cursor:pointer; padding:0; transition:background .2s ease, transform .15s ease;
-  -webkit-tap-highlight-color:transparent;
-}
-.share-btn:hover{ background:rgba(255,255,255,0.10); }
-.share-btn:active{ transform:scale(.92); }
-.share-btn:focus-visible{ outline:2px solid rgba(255,255,255,0.14); outline-offset:3px; }
-.share-btn svg{ width:19px; height:19px; fill:var(--text-secondary, #C7CCD4); display:block; }
-.share-toast{
-  position:fixed; left:50%; bottom:28px; z-index:200;
-  transform:translate(-50%,12px); opacity:0; pointer-events:none;
-  background:rgba(20,20,20,.92); color:#FFF;
-  border:1px solid rgba(255,255,255,.14); border-radius:999px;
-  padding:10px 20px; font-family:'Montserrat',Arial,sans-serif; font-size:13px; font-weight:500;
-  transition:opacity .25s ease, transform .25s ease;
-}
-.share-toast.show{ opacity:1; transform:translate(-50%,0); }
-/* card-share:css:end */
-</style>
+    </style>
 </head>
 <body>
     <div class="card">
-<!-- card-share:button:start -->
-<button class="share-btn" type="button" onclick="shareCard()" aria-label="Share this card" title="Share this card">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path id="shareGlyph" d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z"/></svg>
-</button>
-<!-- card-share:button:end -->
         <div class="logo">
             <img src="logo.svg" alt="Sharkitect Digital">
         </div>
@@ -430,41 +388,6 @@
 
         </script>
 
-<!-- card-share:script:start -->
-<div class="share-toast" id="shareToast" role="status" aria-live="polite">Link copied</div>
-<script>
-(function(){
-  var isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
-  if(!isApple){ var g=document.getElementById('shareGlyph'); if(g) g.setAttribute('d',"M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"); }
-})();
-function cardUrl(){
-  var u = "{{PERSON_CARD_URL}}";
-  if(u.indexOf('{{')===-1) return u;
-  return location.origin + location.pathname.replace(/index\.html$/,'');
-}
-function shareToast(msg){
-  var t=document.getElementById('shareToast'); t.textContent=msg; t.classList.add('show');
-  clearTimeout(window.__shareT); window.__shareT=setTimeout(function(){ t.classList.remove('show'); },2200);
-}
-function copyCardLink(url){
-  if(navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(url).then(function(){ shareToast('Link copied'); }, function(){ legacyCopy(url); });
-  } else { legacyCopy(url); }
-}
-function legacyCopy(url){
-  var ta=document.createElement('textarea'); ta.value=url; ta.setAttribute('readonly','');
-  ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select();
-  var ok=false; try{ ok=document.execCommand('copy'); }catch(e){}
-  document.body.removeChild(ta); shareToast(ok ? 'Link copied' : url);
-}
-function shareCard(){
-  var url=cardUrl(), data={ title:"{{PERSON_FULL_NAME}} \u2014 Sharkitect Digital", url:url };
-  if(navigator.share && (!navigator.canShare || navigator.canShare(data))){
-    navigator.share(data).catch(function(err){ if(err && err.name!=='AbortError') copyCardLink(url); });
-  } else { copyCardLink(url); }
-}
-</script>
-<!-- card-share:script:end -->
 </body>
 
 </html>
